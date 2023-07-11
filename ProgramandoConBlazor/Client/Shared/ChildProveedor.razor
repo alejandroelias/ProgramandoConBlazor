@@ -1,0 +1,24 @@
+﻿@using ProgramandoConBlazor.Shared.Entities;
+<tr>
+    <td>@Proveedor.Id</td>
+    <td>@Proveedor.Nombre</td>
+    <td>@Proveedor.Direccion</td>
+    <td><Checkbox @attributes="ParametrosDelCheckbox" /></td>
+    <td><button @onclick="DeleteProveedor">Eliminar</button></td>
+</tr>
+@code {
+    [Parameter]
+    [EditorRequired]
+    public Proveedor Proveedor { get; set; } = null!;
+
+    private Dictionary<string, object> ParametrosDelCheckbox = new Dictionary<string, object>()
+    {
+        { "checked", "true"},
+        { "disabled", "true" }
+    };
+
+    void DeleteProveedor()
+    {
+        Console.WriteLine($"Eliminar el proveedor {Proveedor.Nombre}");
+    }
+}

@@ -1,0 +1,40 @@
+﻿@using ProgramandoConBlazor.Shared.Entities;
+
+@if (Proveedores is null)
+{
+    <p>No hay proveedores</p>
+}
+else if (Proveedores.Count == 0)
+{
+    <p>Tampoco hay proveedores</p>
+}
+else
+{
+    <div class="container mt-3">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Codigo</th>
+                    <th>Nombre</th>
+                    <th>Direccion</th>
+                    <th>Habilitado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var proveedor in Proveedores)
+                {
+                    <ChildProveedor Proveedor="proveedor" />
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+
+@code {
+    [Parameter]
+    [EditorRequired]
+    //Los parametros siempre deben ser publicos
+    public List<Proveedor>? Proveedores { get; set; }
+}
