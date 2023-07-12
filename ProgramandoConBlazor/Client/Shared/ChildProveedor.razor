@@ -1,15 +1,21 @@
-﻿@using ProgramandoConBlazor.Shared.Entities;
-<tr>
+﻿<tr>
     <td>@Proveedor.Id</td>
     <td>@Proveedor.Nombre</td>
     <td>@Proveedor.Direccion</td>
     <td><Checkbox @attributes="ParametrosDelCheckbox" /></td>
-    <td><button @onclick="DeleteProveedor">Eliminar</button></td>
+    @if (MostrarBotones)
+    {
+        <td><button @onclick="DeleteProveedor">Eliminar</button></td>
+    }
+
 </tr>
+
 @code {
     [Parameter]
     [EditorRequired]
     public Proveedor Proveedor { get; set; } = null!;
+    [Parameter]
+    public bool MostrarBotones { get; set; } = false;
 
     private Dictionary<string, object> ParametrosDelCheckbox = new Dictionary<string, object>()
     {

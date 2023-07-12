@@ -1,6 +1,4 @@
-﻿@using ProgramandoConBlazor.Shared.Entities;
-
-@if (Proveedores is null)
+﻿@if (Proveedores is null)
 {
     <p>No hay proveedores</p>
 }
@@ -10,6 +8,10 @@ else if (Proveedores.Count == 0)
 }
 else
 {
+    <div>
+        <input type="checkbox" @onchange="@(()=> MostrarBotones = !MostrarBotones)" /><span>Mostrar botones</span>
+    </div>
+
     <div class="container mt-3">
         <table class="table">
             <thead>
@@ -24,17 +26,17 @@ else
             <tbody>
                 @foreach (var proveedor in Proveedores)
                 {
-                    <ChildProveedor Proveedor="proveedor" />
+                    <ChildProveedor Proveedor="proveedor" MostrarBotones="MostrarBotones" />
                 }
             </tbody>
         </table>
     </div>
 }
 
-
 @code {
     [Parameter]
     [EditorRequired]
     //Los parametros siempre deben ser publicos
     public List<Proveedor>? Proveedores { get; set; }
+    bool MostrarBotones = false;
 }
