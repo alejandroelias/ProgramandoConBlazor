@@ -1,0 +1,29 @@
+﻿<p>
+    <input type="text" @bind="textoBusqueda" @bind:after="Buscar" @bind:event="oninput" />
+</p>
+
+<p>Proveedores Encontrados</p>
+
+<ul>
+    @foreach (var proveedor in proveedoresEncontrados)
+    {
+        <li>@proveedor</li>
+    }
+</ul>
+
+@code {
+    private string textoBusqueda = string.Empty;
+    private List<string> proveedoresEncontrados = new List<string>();
+
+    private async Task Buscar()
+    {
+        var proveedores = new List<string>
+        {
+            "Juan's Electronics",
+            "Tech Solutions",
+            "Global Gadgets"
+        };
+        await Task.Delay(1000);
+        proveedoresEncontrados = proveedores.Where(p => p.Contains(textoBusqueda)).ToList();
+    }
+}

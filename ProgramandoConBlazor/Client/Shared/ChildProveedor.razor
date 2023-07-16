@@ -5,7 +5,7 @@
     <td><Checkbox @attributes="ParametrosDelCheckbox" /></td>
     @if (MostrarBotones)
     {
-        <td><button @onclick="DeleteProveedor">Eliminar</button></td>
+        <td><button @onclick="@(()=> EliminarProveedor.InvokeAsync(Proveedor))">Eliminar</button></td>
     }
 
 </tr>
@@ -16,15 +16,12 @@
     public Proveedor Proveedor { get; set; } = null!;
     [Parameter]
     public bool MostrarBotones { get; set; } = false;
+    [Parameter]
+    public EventCallback<Proveedor> EliminarProveedor { get; set; }
 
     private Dictionary<string, object> ParametrosDelCheckbox = new Dictionary<string, object>()
     {
         { "checked", "true"},
         { "disabled", "true" }
     };
-
-    void DeleteProveedor()
-    {
-        Console.WriteLine($"Eliminar el proveedor {Proveedor.Nombre}");
-    }
 }

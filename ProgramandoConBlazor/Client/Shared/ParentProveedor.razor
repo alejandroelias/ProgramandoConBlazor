@@ -1,37 +1,34 @@
-﻿@if (Proveedores is null)
-{
-    <p>No hay proveedores</p>
-}
-else if (Proveedores.Count == 0)
-{
-    <p>Tampoco hay proveedores</p>
-}
-else
-{
-    <div>
-        <input type="checkbox" @onchange="@(()=> MostrarBotones = !MostrarBotones)" /><span>Mostrar botones</span>
-    </div>
+﻿<div>
+    <input type="checkbox" @bind="MostrarBotones" /><span>Mostrar botones</span>
+</div>
 
-    <div class="container mt-3">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Codigo</th>
-                    <th>Nombre</th>
-                    <th>Direccion</th>
-                    <th>Habilitado</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var proveedor in Proveedores)
-                {
-                    <ChildProveedor Proveedor="proveedor" MostrarBotones="MostrarBotones" />
-                }
-            </tbody>
-        </table>
-    </div>
-}
+<div class="container mt-3">
+    <InputBusqueda />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Nombre</th>
+                <th>Direccion</th>
+                <th>Habilitado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ListadoGenerico Listado="Proveedores">
+                <HayRegistros>
+                    <ChildProveedor Proveedor="context" MostrarBotones="MostrarBotones" EliminarProveedor="EliminarProveedor" />
+                </HayRegistros>
+            </ListadoGenerico>
+
+            @*@foreach (var proveedor in Proveedores)
+            {
+            <ChildProveedor Proveedor="proveedor" MostrarBotones="MostrarBotones" EliminarProveedor="EliminarProveedor" />
+            }*@
+        </tbody>
+    </table>
+</div>
+
 
 @code {
     [Parameter]
@@ -39,4 +36,9 @@ else
     //Los parametros siempre deben ser publicos
     public List<Proveedor>? Proveedores { get; set; }
     bool MostrarBotones = false;
+
+    private void EliminarProveedor(Proveedor proveedor)
+    {
+        Proveedores!.Remove(proveedor);
+    }
 }
