@@ -1,4 +1,6 @@
-﻿<div>
+﻿@inject IJSRuntime js
+
+<div>
     <input type="checkbox" @bind="MostrarBotones" /><span>Mostrar botones</span>
 </div>
 
@@ -20,11 +22,6 @@
                     <ChildProveedor Proveedor="context" MostrarBotones="MostrarBotones" EliminarProveedor="EliminarProveedor" />
                 </HayRegistros>
             </ListadoGenerico>
-
-            @*@foreach (var proveedor in Proveedores)
-            {
-            <ChildProveedor Proveedor="proveedor" MostrarBotones="MostrarBotones" EliminarProveedor="EliminarProveedor" />
-            }*@
         </tbody>
     </table>
 </div>
@@ -37,8 +34,13 @@
     public List<Proveedor>? Proveedores { get; set; }
     bool MostrarBotones = false;
 
-    private void EliminarProveedor(Proveedor proveedor)
+    private async Task EliminarProveedor(Proveedor proveedor)
     {
-        Proveedores!.Remove(proveedor);
+        var confirmado = await js.Confirm($" Desea borrar el proveedor {proveedor.Nombre}?");
+
+        if (confirmado)
+        {
+            Proveedores!.Remove(proveedor);
+        }
     }
 }
