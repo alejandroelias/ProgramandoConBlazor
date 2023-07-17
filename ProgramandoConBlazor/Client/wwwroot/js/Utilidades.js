@@ -4,3 +4,7 @@
             console.log('Conteo desde js ' + resultado);
         })
 }
+
+function pruebaDotNetInstancia(dotnetHelper) {
+    dotnetHelper.invokeMethodAsync("IncrementCount")
+}

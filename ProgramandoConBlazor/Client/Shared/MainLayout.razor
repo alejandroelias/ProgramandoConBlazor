@@ -7,7 +7,15 @@
 
     <main>
         <article class="content px-4">
-            @Body
+            <CascadingValue Value="@appState">
+                @Body
+            </CascadingValue>
         </article>
     </main>
 </div>
+
+@code {
+    //private string Color = "blue";
+
+    AppState appState = new AppState();
+}

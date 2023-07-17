@@ -4,8 +4,7 @@
 
 <PageTitle>Weather forecast</PageTitle>
 
-<h1>Weather forecast</h1>
-
+<h1 style="color: @appState.Color; font-size: @appState.Size">Weather forecast</h1>
 <p>This component demonstrates fetching data from the server.</p>
 
 @if (forecasts == null)
@@ -39,6 +38,10 @@ else
 
 @code {
     private WeatherForecast[]? forecasts;
+
+    //Usando parametro de cascada (desde el padre MainLayout)
+    //[CascadingParameter] protected string Color { get; set; } = null!;
+    [CascadingParameter] protected AppState appState { get; set; } = null!;
 
     protected override async Task OnInitializedAsync()
     {

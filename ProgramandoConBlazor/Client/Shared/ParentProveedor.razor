@@ -43,4 +43,13 @@
             Proveedores!.Remove(proveedor);
         }
     }
+
+    public void LimpiarProveedores()
+    {
+        if(Proveedores is not null)
+        {
+            Proveedores.Clear();
+        }
+    }
+
 }

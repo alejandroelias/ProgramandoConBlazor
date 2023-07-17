@@ -4,14 +4,23 @@
 <PageTitle>Proveedores</PageTitle>
 <h1>Hello, Proveedores</h1>
 
-<h2>Usando el componente: ListadoProveedores.razor</h2>
-<ParentProveedor Proveedores="Proveedores" />
+<button @onclick ="LimpiarProveedores">Limpiar proveedores</button>
+
+<ParentProveedor @ref="listadoProveedores" Proveedores="Proveedores" />
 @code {
 
     public List<Proveedor>? Proveedores { get; set; }
 
+    //Haciendo referencia a un Componente
+    public ParentProveedor? listadoProveedores;
+
     protected override void OnInitialized()
     {
         Proveedores = repositorio.GetProveedores();
+    }
+
+    private void LimpiarProveedores()
+    {
+        listadoProveedores!.LimpiarProveedores();
     }
 }
